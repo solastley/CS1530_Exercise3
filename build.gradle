@@ -1,0 +1,28 @@
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+task run(type:JavaExec) {
+  main = 'exercise/Exercise'
+  classpath = sourceSets.main.runtimeClasspath
+
+  // set standard input, default Gradle STD_IN is not the command line
+	standardInput = System.in
+
+  // pass command line argument
+  if (project.hasProperty("arg")) {
+    args Eval.me(arg)
+  }
+}
+
+task sequenceHelp() {
+  println "Integer Sequence Project"
+  println "Given an integer n as an argument, displays Tri(n) LC(n)"
+}
